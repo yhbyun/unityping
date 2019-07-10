@@ -1,5 +1,5 @@
-/*! unityping - v0.0.3 - 2015-04-11
-* Copyright (c) 2015 Jinyoung Kim; Licensed MIT */
+/*! unityping - v0.1.0 - 2019-07-10
+* Copyright (c) 2019 Jinyoung Kim; Licensed MIT */
 (function($) {
   'use strict';
 
@@ -74,12 +74,14 @@
 
       setTimeout(function() {
         if(that.pos.str === sq.length) {
-          if(that.pos.sentence === that.options.string.length-1) { return; }
+          if(that.pos.sentence === that.options.string.length-1) {
+            that.options.onComplete();
+            return;
+          }
           setTimeout(function() {
             that.backspace(sq);
           }, that.options.backDelay);
 
-          that.options.onComplete();
           return;
         }
 
@@ -113,7 +115,6 @@
             }, that.options.startDelay);
           }
 
-          that.options.onComplete();
           return;
         }
         that.written = that.written.substr(0, that.written.length-1);

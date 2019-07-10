@@ -72,12 +72,14 @@
 
       setTimeout(function() {
         if(that.pos.str === sq.length) {
-          if(that.pos.sentence === that.options.string.length-1) { return; }
+          if(that.pos.sentence === that.options.string.length-1) {
+            that.options.onComplete();
+            return;
+          }
           setTimeout(function() {
             that.backspace(sq);
           }, that.options.backDelay);
 
-          that.options.onComplete();
           return;
         }
 
@@ -111,7 +113,6 @@
             }, that.options.startDelay);
           }
 
-          that.options.onComplete();
           return;
         }
         that.written = that.written.substr(0, that.written.length-1);
